@@ -1,8 +1,13 @@
-import * as functions from 'firebase-functions';
+import * as functions from "firebase-functions";
+import * as express from "express";
+import * as bodyParser from "body-parser";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+import postsRouter from "./routers/posts";
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/", postsRouter);
+
+export const posts = functions.region("asia-northeast1").https.onRequest(app);
