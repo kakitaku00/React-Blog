@@ -28,9 +28,6 @@ router
   .route("/api")
   .get(async (req, res) => {
     const posts: any[] = [];
-    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.set("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
     try {
       const querySnapShot = await db.collection("posts").get();
       querySnapShot.forEach((doc) => {
