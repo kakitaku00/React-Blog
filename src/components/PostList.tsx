@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
-import postsApi from "../api/postsApi";
+import postsApi from "../api/articleApi";
 
 type Post = {
   title: string;
