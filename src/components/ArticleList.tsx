@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
-import postsApi from "../api/articleApi";
+import articleApi from "../api/articleApi";
 
 type Post = {
   title: string;
@@ -8,11 +8,11 @@ type Post = {
   imageUrl?: string;
 };
 
-const PostList = () => {
+const ArticleList = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    postsApi.get("/").then((res) => {
+    articleApi.get("/").then((res) => {
       setPosts(res.data.posts);
     });
   }, []);
@@ -37,4 +37,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default ArticleList;

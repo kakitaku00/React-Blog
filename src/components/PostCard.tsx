@@ -7,24 +7,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 
-import articleApi from "../api/article";
-
 type Post = {
   title: string;
   body: string;
   imageUrl?: string;
-};
-
-const testPost = async () => {
-  await articleApi
-    .post("/", {
-      title: "react post",
-      body: "reactから送信テスト",
-    })
-    .then((res) => {
-      console.log(res);
-    });
-  console.log("done");
 };
 
 const useStyles = makeStyles(() =>
@@ -50,26 +36,23 @@ const PostCard = ({ title, body, imageUrl }: Post) => {
   const classes = useStyles();
 
   return (
-    <>
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia className={classes.media} image={imageUrl} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {body.length >= 30 ? body.substr(0, 30) + "..." : body}
-            </Typography>
-            <div className={classes.chipWrapper}>
-              <Chip label="FrontEnd" />
-              <Chip label="Blog" />
-            </div>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <button onClick={() => testPost()}>post</button>
-    </>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia className={classes.media} image={imageUrl} />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {body.length >= 30 ? body.substr(0, 30) + "..." : body}
+          </Typography>
+          <div className={classes.chipWrapper}>
+            <Chip label="FrontEnd" />
+            <Chip label="Blog" />
+          </div>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
