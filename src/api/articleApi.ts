@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const postsApi = axios.create({
+const articleApi = axios.create({
   baseURL:
     "https://asia-northeast1-react-blog-92a07.cloudfunctions.net/article/api/v1",
   // "http://localhost:5001/react-blog-92a07/asia-northeast1/article/api/v1",
@@ -11,4 +11,4 @@ const postsApi = axios.create({
   responseType: "json",
 });
 
-export default postsApi;
+export default articleApi;
