@@ -1,5 +1,6 @@
-import * as express from "express";
+import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import * as express from "express";
 import * as serviceAccount from "../serviceAccountKey.json";
 
 // typescriptでfirebase-adminを扱う http://ropupu-ropupu.hatenablog.com/entry/2019/02/19/212426
@@ -23,11 +24,20 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const router = express.Router();
+const key = functions.config().articleservice.key;
+
+function checkApiKey(req: express.Request, res: express.Response) {
+  const request_key = req.get("x-api-key");
+  if (key !== request_key) {
+    res.status(400).send("Error: Bad Api key");
+  }
+}
 
 router
-  .route("/api")
+  .route("/")
   .get(async (req, res) => {
     const posts: any[] = [];
+    checkApiKey(req, res);
     try {
       const querySnapShot = await db.collection("posts").get();
       querySnapShot.forEach((doc) => {
@@ -46,8 +56,9 @@ router
         .json({ message: `Error getting document: ${error.message}` });
     }
   })
-  .post(async (req, res) => {
+  .post(async (req, res, next) => {
     const { title, body } = req.body;
+    checkApiKey(req, res);
     try {
       await db.collection("posts").add({
         title,
@@ -62,10 +73,11 @@ router
   });
 
 router
-  .route("/api/:id")
+  .route("/:id")
   .put(async (req, res) => {
     const { id } = req.params;
     const { title, body } = req.body;
+    checkApiKey(req, res);
     try {
       await db.collection("posts").doc(id).update({
         title,
@@ -79,6 +91,7 @@ router
   })
   .delete(async (req, res) => {
     const { id } = req.params;
+    checkApiKey(req, res);
     try {
       await db.collection("posts").doc(id).delete();
       res.status(200).json({ message: `Deleted ID： ${id}` });
