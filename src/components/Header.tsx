@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   fade,
   createStyles,
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
+    },
+    titleItem: {
+      color: "#fff",
+      textDecoration: "none",
     },
     search: {
       position: "relative",
@@ -81,7 +86,9 @@ const Header = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Blog
+              <Link to="/" className={classes.titleItem}>
+                Blog
+              </Link>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
