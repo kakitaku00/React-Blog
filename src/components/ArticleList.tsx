@@ -6,6 +6,7 @@ import articleApi from "../api/articleApi";
 type Post = {
   title: string;
   text: string;
+  createdAt: any;
   imageUrl?: string;
 };
 
@@ -40,6 +41,7 @@ const ArticleList = () => {
         <ArticleCard
           title={post.title}
           text={post.text}
+          createdAt={post.createdAt._seconds}
           imageUrl={
             "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2450&q=80"
           }

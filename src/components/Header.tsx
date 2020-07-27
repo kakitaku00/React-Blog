@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   fade,
@@ -13,6 +13,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const drawerListWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,11 +73,27 @@ const useStyles = makeStyles((theme: Theme) =>
         width: "20ch",
       },
     },
+    list: {
+      width: drawerListWidth,
+    },
   })
 );
 
 const Header = () => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const ListItemLink = (props: ListItemProps<"a", { button?: true }>) => {
+    return <ListItem button component="a" {...props} />;
+  };
 
   return (
     <div className={classes.root}>
@@ -83,6 +105,7 @@ const Header = () => {
               className={classes.menuButton}
               color="inherit"
               aria-label="menu"
+              onClick={handleDrawerOpen}
             >
               <MenuIcon />
             </IconButton>
@@ -107,6 +130,13 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </header>
+      <Drawer anchor={"left"} open={open} onClose={handleDrawerClose}>
+        <List className={classes.list}>
+          <ListItemLink href="/create">
+            <ListItemText primary={"記事を投稿する"} />
+          </ListItemLink>
+        </List>
+      </Drawer>
     </div>
   );
 };

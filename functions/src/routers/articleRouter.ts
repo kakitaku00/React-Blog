@@ -3,7 +3,7 @@ import * as admin from "firebase-admin";
 import * as express from "express";
 import * as serviceAccount from "../serviceAccountKey.json";
 
-// typescriptでfirebase-adminを扱う http://ropupu-ropupu.hatenablog.com/entry/2019/02/19/212426
+// typescriptでfirebase-adminを扱う
 const params = {
   type: serviceAccount.type,
   projectId: serviceAccount.project_id,
