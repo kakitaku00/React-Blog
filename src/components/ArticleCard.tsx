@@ -15,11 +15,8 @@ type Post = {
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      maxWidth: 345,
-    },
     media: {
-      height: 140,
+      height: 180,
     },
     chipWrapper: {
       display: "flex",
@@ -36,7 +33,7 @@ const PostCard = ({ title, text, imageUrl }: Post) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardActionArea>
         <CardMedia className={classes.media} image={imageUrl} />
         <CardContent>

@@ -39,7 +39,10 @@ router
     const posts: any[] = [];
     checkApiKey(req, res);
     try {
-      const querySnapShot = await db.collection("posts").get();
+      const querySnapShot = await db
+        .collection("posts")
+        .orderBy("createdAt", "desc")
+        .get();
       querySnapShot.forEach((doc) => {
         const post = doc.data();
         posts.push({
@@ -73,16 +76,41 @@ router
 
 router
   .route("/:id")
-  .put(async (req, res) => {
+  .get(async (req, res) => {
     const { id } = req.params;
-    const { title, body } = req.body;
     checkApiKey(req, res);
     try {
-      await db.collection("posts").doc(id).update({
-        title,
-        body,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+      await db
+        .collection("posts")
+        .doc(id)
+        .get()
+        .then((doc) => {
+          const article = {
+            ...doc.data(),
+            id,
+          };
+          res.status(200).json({
+            article,
+          });
+        });
+    } catch (error) {
+      res
+        .status(400)
+        .json({ message: `Error getting document: ${error.message}` });
+    }
+  })
+  .put(async (req, res) => {
+    const { id } = req.params;
+    const articleData = req.body.articleData;
+    checkApiKey(req, res);
+    try {
+      await db
+        .collection("posts")
+        .doc(id)
+        .update({
+          ...articleData,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
       res.status(200).json({ message: `Updated ID: ${id}` });
     } catch (error) {
       res.status(500).json({ message: `Put Failed` });

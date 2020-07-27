@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "./ArticleCard";
 import articleApi from "../api/articleApi";
 
@@ -8,7 +9,19 @@ type Post = {
   imageUrl?: string;
 };
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gridGap: "30px",
+      justifyContent: "space-between",
+    },
+  })
+);
+
 const ArticleList = () => {
+  const classes = useStyles();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -22,7 +35,7 @@ const ArticleList = () => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       {posts.map((post: Post, index: number) => (
         <ArticleCard
           title={post.title}
