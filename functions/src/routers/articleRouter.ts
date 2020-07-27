@@ -56,13 +56,12 @@ router
         .json({ message: `Error getting document: ${error.message}` });
     }
   })
-  .post(async (req, res, next) => {
-    const { title, body } = req.body;
+  .post(async (req, res) => {
+    const articleData = req.body.articleData;
     checkApiKey(req, res);
     try {
       await db.collection("posts").add({
-        title,
-        body,
+        ...articleData,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });

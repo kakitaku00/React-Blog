@@ -9,6 +9,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import articleApi from "../api/articleApi";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,10 +42,43 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Create = () => {
   const classes = useStyles();
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
+  const [tag, setTag] = useState("");
+  const [text, setText] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCategory(event.target.value as string);
+  type ArticleData = {
+    title: string;
+    category: string;
+    tag: string;
+    text: string;
+    isShow: boolean;
+  };
+
+  const emptyCheck = (articleData: ArticleData) => {
+    return Object.values(articleData).some((data) => !data);
+  };
+
+  const articlePost = async (isShow: boolean) => {
+    const articleData = {
+      title,
+      category,
+      tag,
+      text,
+      isShow,
+    };
+    if (emptyCheck(articleData)) {
+      alert("未入力項目があります");
+      return;
+    }
+    await articleApi
+      .post("/", { articleData })
+      .then(() => {
+        alert("投稿が完了しました");
+      })
+      .catch(() => {
+        alert("投稿が失敗しました");
+      });
   };
 
   return (
@@ -58,12 +92,18 @@ const Create = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={(e) => setTitle(e.target.value as string)}
           />
           <FormControl className={classes.formControl}>
             <InputLabel shrink id="select-label">
               Category
             </InputLabel>
-            <Select labelId="select-label" onChange={handleChange} displayEmpty>
+            <Select
+              labelId="select-label"
+              value={category}
+              onChange={(e) => setCategory(e.target.value as string)}
+              displayEmpty
+            >
               <MenuItem value={"Web"}>Web</MenuItem>
               <MenuItem value={"Hobby"}>Hobby</MenuItem>
               <MenuItem value={"Other"}>Other</MenuItem>
@@ -75,11 +115,22 @@ const Create = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={(e) => setTag(e.target.value as string)}
           />
-          <TextField label="Text" fullWidth multiline rows="8" />
+          <TextField
+            label="Text"
+            fullWidth
+            multiline
+            rows="8"
+            onChange={(e) => setText(e.target.value as string)}
+          />
           <div className={classes.buttons}>
-            <Button variant="contained" color="primary">
-              投稿
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => articlePost(true)}
+            >
+              公開
             </Button>
             <Button variant="contained">下書き</Button>
           </div>
