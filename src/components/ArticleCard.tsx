@@ -59,7 +59,11 @@ const PostCard = ({ title, text, createdAt, imageUrl }: Post) => {
             </div>
             <div className={classes.create}>
               <span>
-                {new Date(createdAt * 1000).toLocaleDateString("ja-JP")}
+                {new Date(createdAt * 1000).toLocaleDateString("ja-JP", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
               </span>
             </div>
           </div>
