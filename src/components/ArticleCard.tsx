@@ -9,7 +9,7 @@ import Chip from "@material-ui/core/Chip";
 
 type Post = {
   title: string;
-  body: string;
+  text: string;
   imageUrl?: string;
 };
 
@@ -26,13 +26,13 @@ const useStyles = makeStyles(() =>
       flexWrap: "wrap",
       marginTop: "1rem",
       "& > *:not(:first-of-type)": {
-        marginLeft: "4px",
+        marginLeft: "6px",
       },
     },
   })
 );
 
-const PostCard = ({ title, body, imageUrl }: Post) => {
+const PostCard = ({ title, text, imageUrl }: Post) => {
   const classes = useStyles();
 
   return (
@@ -44,7 +44,7 @@ const PostCard = ({ title, body, imageUrl }: Post) => {
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {body.length >= 30 ? body.substr(0, 30) + "..." : body}
+            {text.length >= 30 ? text.substr(0, 30) + "..." : text}
           </Typography>
           <div className={classes.chipWrapper}>
             <Chip label="FrontEnd" />

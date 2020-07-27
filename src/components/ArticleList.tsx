@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PostCard from "./PostCard";
+import ArticleCard from "./ArticleCard";
 import articleApi from "../api/articleApi";
 
 type Post = {
   title: string;
-  body: string;
+  text: string;
   imageUrl?: string;
 };
 
@@ -24,9 +24,9 @@ const ArticleList = () => {
   return (
     <div>
       {posts.map((post: Post, index: number) => (
-        <PostCard
+        <ArticleCard
           title={post.title}
-          body={post.body}
+          text={post.text}
           imageUrl={
             "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2450&q=80"
           }

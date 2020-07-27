@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: "30px",
-      backgroundColor: "#eee",
+      backgroundColor: "#edf0ff",
       borderRadius: "4px",
     },
     formControl: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       padding: "30px",
       "& > *:not(:first-of-type)": {
-        marginTop: "32px",
+        marginTop: "30px",
       },
     },
     selectEmpty: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       "& > *:not(:first-of-type)": {
-        marginLeft: "16px",
+        marginLeft: "18px",
       },
     },
   })
