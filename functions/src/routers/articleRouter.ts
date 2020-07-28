@@ -34,7 +34,7 @@ function checkApiKey(req: express.Request, res: express.Response) {
 }
 
 router
-  .route("/")
+  .route("/article")
   .get(async (req, res) => {
     const posts: any[] = [];
     checkApiKey(req, res);
@@ -75,7 +75,7 @@ router
   });
 
 router
-  .route("/:id")
+  .route("/article/:id")
   .get(async (req, res) => {
     const { id } = req.params;
     checkApiKey(req, res);

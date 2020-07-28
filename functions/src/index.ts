@@ -8,4 +8,4 @@ app.use(cors());
 
 app.use("/api/v1", postsRouter);
 
-export const article = functions.region("asia-northeast1").https.onRequest(app);
+export const blog = functions.region("asia-northeast1").https.onRequest(app);
