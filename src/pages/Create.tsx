@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Create = () => {
+const Create: React.FC = () => {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");

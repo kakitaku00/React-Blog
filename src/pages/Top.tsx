@@ -3,7 +3,8 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "../components/ArticleCard";
 import articleApi from "../api/articleApi";
 
-type Post = {
+type Article = {
+  id: string;
   title: string;
   text: string;
   createdAt: any;
@@ -21,27 +22,28 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const Top = () => {
+const Top: React.FC = () => {
   const classes = useStyles();
-  const [posts, setPosts] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     articleApi.get("/").then((res) => {
-      setPosts(res.data.posts);
+      setArticles(res.data.posts);
     });
   }, []);
 
-  if (!posts.length) {
+  if (!articles.length) {
     return <p>Loading...</p>;
   }
 
   return (
     <div className={classes.root}>
-      {posts.map((post: Post, index: number) => (
+      {articles.map((article: Article, index: number) => (
         <ArticleCard
-          title={post.title}
-          text={post.text}
-          createdAt={post.createdAt._seconds}
+          id={article.id}
+          title={article.title}
+          text={article.text}
+          createdAt={article.createdAt._seconds}
           imageUrl={
             "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2450&q=80"
           }

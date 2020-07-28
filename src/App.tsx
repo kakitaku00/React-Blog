@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Top from "./pages/Top";
 import Create from "./pages/Create";
+import Article from "./pages/Article";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -21,6 +22,9 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/create">
               <Create />
+            </Route>
+            <Route exact path="/:id">
+              <Article />
             </Route>
           </Switch>
         </Container>

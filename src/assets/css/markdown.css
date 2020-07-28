@@ -1,0 +1,18 @@
+/* ========== Markdown CSS ========== */
+.markdown-body .highlight pre,
+.markdown-body pre {
+  background-color: #3f3f3f;
+  color: #dcdcdc;
+}
+
+.markdown-body pre code {
+  color: #dcdcdc;
+}
+
+.markdown-body ol {
+  list-style: decimal;
+}
+
+.markdown-body ul {
+  list-style: disc;
+}
