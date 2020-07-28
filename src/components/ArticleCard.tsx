@@ -50,15 +50,19 @@ const PostCard = ({ title, text, createdAt, imageUrl }: Post) => {
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
+            {/* 本文を省略し表示 */}
             {text.length >= 30 ? text.substr(0, 30) + "..." : text}
           </Typography>
           <div className={classes.sub}>
+            {/* タグ */}
             <div className={classes.tag}>
               <Chip label="FrontEnd" />
               <Chip label="Blog" />
             </div>
+            {/* 日付 */}
             <div className={classes.create}>
               <span>
+                {/* ゼロ埋めで表示 */}
                 {new Date(createdAt * 1000).toLocaleDateString("ja-JP", {
                   year: "numeric",
                   month: "2-digit",
