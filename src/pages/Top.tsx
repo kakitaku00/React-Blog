@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import ArticleCard from "./ArticleCard";
+import ArticleCard from "../components/ArticleCard";
 import articleApi from "../api/articleApi";
 
 type Post = {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ArticleList = () => {
+const Top = () => {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
 
@@ -52,4 +52,4 @@ const ArticleList = () => {
   );
 };
 
-export default ArticleList;
+export default Top;
