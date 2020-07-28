@@ -3,13 +3,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "../components/ArticleCard";
 import articleApi from "../api/articleApi";
 
-type Article = {
-  id: string;
-  title: string;
-  text: string;
-  createdAt: any;
-  imageUrl?: string;
-};
+type Article = React.ComponentProps<typeof ArticleCard>;
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -39,16 +33,7 @@ const Top: React.FC = () => {
   return (
     <div className={classes.root}>
       {articles.map((article: Article, index: number) => (
-        <ArticleCard
-          id={article.id}
-          title={article.title}
-          text={article.text}
-          createdAt={article.createdAt._seconds}
-          imageUrl={
-            "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2450&q=80"
-          }
-          key={index.toString()}
-        />
+        <ArticleCard {...article} key={index.toString()} />
       ))}
     </div>
   );

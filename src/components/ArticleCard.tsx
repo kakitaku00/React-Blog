@@ -14,8 +14,7 @@ type Article = {
   id: string;
   title: string;
   text: string;
-  createdAt: number;
-  imageUrl?: string;
+  createdAt: any;
 };
 
 const useStyles = makeStyles(() =>
@@ -41,7 +40,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const PostCard = ({ id, title, text, createdAt, imageUrl }: Article) => {
+const PostCard: React.FC<Article> = (article) => {
   const classes = useStyles();
   return (
     <Card>
@@ -49,17 +48,25 @@ const PostCard = ({ id, title, text, createdAt, imageUrl }: Article) => {
         underline="none"
         color="inherit"
         component={RouterLink}
-        to={`/${id}`}
+        to={`/${article.id}`}
       >
         <CardActionArea component="div" disableRipple>
-          <CardMedia className={classes.media} image={imageUrl} />
+          <CardMedia
+            className={classes.media}
+            component="img"
+            image={
+              "https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2450&q=80"
+            }
+          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {title}
+              {article.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {/* 本文を省略し表示 */}
-              {text.length >= 30 ? text.substr(0, 30) + "..." : text}
+              {article.text.length >= 30
+                ? article.text.substr(0, 30) + "..."
+                : article.text}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -74,11 +81,14 @@ const PostCard = ({ id, title, text, createdAt, imageUrl }: Article) => {
         <div className={classes.create}>
           <span>
             {/* ゼロ埋めで表示 */}
-            {new Date(createdAt * 1000).toLocaleDateString("ja-JP", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })}
+            {new Date(article.createdAt._seconds * 1000).toLocaleDateString(
+              "ja-JP",
+              {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              }
+            )}
           </span>
         </div>
       </CardActions>
