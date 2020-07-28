@@ -5,8 +5,8 @@ import Container from "@material-ui/core/Container";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ArticleList from "./components/ArticleList";
-import Create from "./components/Create";
+import Top from "./pages/Top";
+import Create from "./pages/Create";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <Container>
           <Switch>
             <Route exact path="/">
-              <ArticleList />
+              <Top />
             </Route>
             <Route exact path="/create">
               <Create />

@@ -55,6 +55,7 @@ const Create = () => {
     isShow: boolean;
   };
 
+  // 入力項目に空欄がないかチェック
   const emptyCheck = (articleData: ArticleData) => {
     return Object.values(articleData).some((data) => !data);
   };
